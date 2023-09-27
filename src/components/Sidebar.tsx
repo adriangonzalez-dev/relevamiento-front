@@ -1,5 +1,7 @@
+import { useMetadata } from "../hooks/useMetadata"
 
 export const Sidebar = () => {
+  const {agentes, isLoading, paises} = useMetadata()
   return (
     <div className="flex h-screen flex-col justify-between border-e bg-white w-1/6">
   <div className="px-4 py-6">
@@ -45,50 +47,20 @@ export const Sidebar = () => {
           </summary>
 
           <ul className="mt-2 space-y-1 px-4">
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Argentina
-              </a>
-            </li>
-
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Brasil
-              </a>
-            </li>
-
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Panamá
-              </a>
-            </li>
-
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Mexico
-              </a>
-            </li>
-
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Puerto Rico
-              </a>
-            </li>
+                {
+                    isLoading ? (
+                      <p>Cargando...</p>
+                    ) : (
+                    paises?.map((pais) =>
+                      <li key={pais.id}>
+                        <a
+                          href=""
+                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          {pais.name}
+                        </a>
+                      </li>))
+                }
           </ul>
         </details>
       </li>
@@ -98,7 +70,7 @@ export const Sidebar = () => {
           <summary
             className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
-            <span className="text-sm font-medium"> Account </span>
+            <span className="text-sm font-medium"> Agente </span>
 
             <span
               className="shrink-0 transition duration-300 group-open:-rotate-180"
@@ -119,34 +91,22 @@ export const Sidebar = () => {
           </summary>
 
           <ul className="mt-2 space-y-1 px-4">
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Details
-              </a>
-            </li>
-
-            <li>
-              <a
-                href=""
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Security
-              </a>
-            </li>
-
-            <li>
-              <form action="/logout">
-                <button
-                  type="submit"
-                  className="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                >
-                  Logout
-                </button>
-              </form>
-            </li>
+            {
+              isLoading ? (
+                <p>cargando...</p>
+              ):(
+                agentes?.map((agente) => (
+                  <li key={agente.id}>
+                    <a
+                      href=""
+                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                    >
+                      {agente.name}
+                    </a>
+                  </li>
+                ))
+              )
+            }
           </ul>
         </details>
       </li>

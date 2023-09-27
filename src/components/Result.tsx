@@ -1,19 +1,8 @@
 import { useData } from "../hooks/useData";
-import { Loader } from "./Loader";
 import { RowResult } from "./RowResult";
 
 export const Result = () => {
-  const {data, isLoading} = useData()
-
-
-  if(isLoading){
-    return (
-      <div className="w-full flex items-center justify-center">
-        <Loader/>
-      </div>
-    )
-  }
-
+  const {data} = useData()
   return (
     <div className="overflow-x-auto w-5/6 mx-auto">
       <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">

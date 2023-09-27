@@ -1,10 +1,8 @@
 import { Card, Title, DonutChart, Legend } from "@tremor/react";
 import { useData } from "../hooks/useData";
 import { useEffect, useState } from "react";
-import { Loader } from "./Loader";
 
-
-export const LegendCard = () => {
+export const Chart = () => {
   
   const [agentTicketCounts, setAgentTicketCounts] = useState<{ agent: string; count: number }[]>([]);
   const {isLoading, data} = useData()
@@ -39,15 +37,7 @@ export const LegendCard = () => {
   }, [data, isLoading]);
 
   return (
-    <Card className="w-1/2">
-      {
-        isLoading ? (
-          <div className="w-full flex items-center justify-center">
-            <Loader/>
-          </div>
-        ) :
-        (
-          <>
+    <Card className="max-w-lg">
             <Title>Total pedidos: {data?.length}</Title>
             <DonutChart
               variant="pie"
@@ -62,10 +52,6 @@ export const LegendCard = () => {
               categories={agentTicketCounts.map((agent) => agent.agent)}
               colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
             />
-          </>
-        )
-      }
-    
-  </Card>
+    </Card>
   )
 };
