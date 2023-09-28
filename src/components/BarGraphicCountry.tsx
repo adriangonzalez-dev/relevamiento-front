@@ -1,8 +1,12 @@
 import { BarList, Card, Title, Bold, Flex, Text } from "@tremor/react";
 import {arcos, gmail, invgate, wsp} from '../assets/icons'
-import { useData } from "../hooks/useData";
 import { useEffect, useState } from "react";
+import { DataSheet } from "../context/data/dataContext";
 import { useMetadata } from "../hooks/useMetadata";
+
+interface Props {
+    data: DataSheet[] | undefined
+}
 
 interface InitialValue {
     name: string,
@@ -49,20 +53,18 @@ const initialValue:InitialValue[] = [
   },
 ];
 
-export const BarGraphic = () => {
-    const {data, isLoading} = useData()
-    const {via} = useMetadata()
+export const BarGraphicCountry = ({data}:Props) => {
     const [newData, setNewData] = useState<InitialValue[]>(initialValue)
-    const getId = (name:string) => {
-      return via.find(item => item.name === name)?.id
-    }
+    const {via, isLoading} = useMetadata()
     useEffect(() => {
+
         const getData = () => {
-            if (!isLoading && data) {
+            if (data) {
+
                 setNewData([
                     {
                         name: "Invgate Arcos",
-                        value: data.filter(item => +item.via.id === getId('Invgate Arcos')).length,
+                        value: data.filter(item => +item.via.id === 4).length,
                         icon: function ArcosIcon() {
                             return (
                             <img src={arcos} alt="" className="w-6 mr-2"/>
@@ -71,7 +73,7 @@ export const BarGraphic = () => {
                     },
                     {
                         name: "Invgate",
-                        value: data.filter(item => +item.via.id === getId('Invgate SIA')).length,
+                        value: data.filter(item => +item.via.id === 1).length,
                         icon: function InvgateIcon() {
                             return (
                               <img src={invgate} alt="" className="w-6 mr-2"/>
@@ -80,7 +82,7 @@ export const BarGraphic = () => {
                     },
                     {
                         name: "Whatsapp",
-                        value: data.filter(item => +item.via.id === getId('Whatsapp')).length,
+                        value: data.filter(item => +item.via.id === 3).length,
                         icon: function InvgateIcon() {
                             return (
                               <img src={wsp} alt="" className="w-6 mr-2"/>
@@ -89,7 +91,7 @@ export const BarGraphic = () => {
                     },
                     {
                         name: "Gmail",
-                        value: data.filter(item => +item.via.id === getId('Email')).length,
+                        value: data.filter(item => +item.via.id === 2).length,
                         icon: function InvgateIcon() {
                             return (
                               <img src={gmail} alt="" className="w-6 mr-2"/>
@@ -100,7 +102,7 @@ export const BarGraphic = () => {
               }
         }
         getData()
-    },[isLoading, data])
+    },[data, via, isLoading])
     return(
       <Card className="max-w-lg h-72 lg:h-full">
             <Title>Total por via de solicitud</Title>

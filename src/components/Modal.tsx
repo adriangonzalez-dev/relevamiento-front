@@ -3,6 +3,8 @@ import {toast} from 'sonner'
 import { ErrorMessage } from './ErrorMessage';
 import { createData } from '../services/dataServices';
 import { useData } from '../hooks/useData';
+import { useMetadata } from '../hooks/useMetadata';
+import { useState } from 'react';
 interface Props {
     handleActiveForm: () => void;
 }
@@ -22,11 +24,15 @@ const getUNIXtimestamp = (fecha:Date | number) => {
 }
 
 export const Modal = ({ handleActiveForm }:Props) => {
+    const [loading, setLoading] = useState<boolean>(false)
     const {updatedData} = useData()
+    const {segmentos, isLoading, via} = useMetadata()
     
     const {handleSubmit, register, formState:{errors}} = useForm<CreateDataDto>()
 
     const getSubmit:SubmitHandler<CreateDataDto> = async (data:CreateDataDto) => {
+        setLoading(true)
+        const dia = 86400
         const dataToSend = {
             request:data.request,
             country:+data.country,
@@ -34,8 +40,8 @@ export const Modal = ({ handleActiveForm }:Props) => {
             segment:+data.segment,
             type:+data.type,
             via:+data.via,
-            request_date: getUNIXtimestamp(data.request_date),
-            implementation_date:getUNIXtimestamp(data.implementation_date)
+            request_date: getUNIXtimestamp(data.request_date) + dia,
+            implementation_date:getUNIXtimestamp(data.implementation_date) + dia
         }
         try {
             const newData = await createData(dataToSend)
@@ -44,6 +50,8 @@ export const Modal = ({ handleActiveForm }:Props) => {
             toast.success('Pedido creado con exito')
         } catch (error) {
             toast.error('Error al crear el pedido')
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -154,12 +162,19 @@ export const Modal = ({ handleActiveForm }:Props) => {
                                 }
                             })}>
                                 <option selected disabled>Seleccione el segmento</option>
-                                <option value={4}>Mostrador</option>
-                                <option value={5}>McCafé</option>
-                                <option value={6}>CDP</option>
-                                <option value={7}>Automac</option>
-                                <option value={8}>Crewroom</option>
-                                <option value={9}>Varios</option>
+                                {
+                                    isLoading ?
+                                    <option value="" disabled>Cargando...</option>
+                                    :
+                                    <>
+                                        <option value={segmentos.find(item=>item.name == 'Mostrador')?.id}>Mostrador</option>
+                                        <option value={segmentos.find(item=>item.name == 'MCCafe')?.id}>McCafé</option>
+                                        <option value={segmentos.find(item=>item.name == 'CDP')?.id}>CDP</option>
+                                        <option value={segmentos.find(item=>item.name == 'Automac')?.id}>Automac</option>
+                                        <option value={segmentos.find(item=>item.name == 'Crewroom')?.id}>Crewroom</option>
+                                        <option value={segmentos.find(item=>item.name == 'Varios')?.id}>Varios</option>
+                                    </>
+                                }
 
                             </select>
                             {
@@ -237,9 +252,9 @@ export const Modal = ({ handleActiveForm }:Props) => {
                                 }
                             })}>
                                 <option selected disabled>Seleccione la via de solicitud</option>
-                                <option value={1}>Whatsapp</option>
-                                <option value={2}>Gmail</option>
-                                <option value={4}>Invgate Arcos</option>
+                                <option value={via.find(item=>item.name == 'Whatsapp')?.id}>Whatsapp</option>
+                                <option value={via.find(item=>item.name == 'Email')?.id}>Gmail</option>
+                                <option value={via.find(item=>item.name == 'Invgate Arcos')?.id}>Invgate Arcos</option>
                             </select>
                             {
                                 errors.via && <ErrorMessage message={String(errors.via?.message)}/>
@@ -251,14 +266,17 @@ export const Modal = ({ handleActiveForm }:Props) => {
                         <button
                             onClick={() => handleActiveForm()}
                             className="block w-1/2 rounded-lg bg-red-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-red-600 focus:outline-none focus:ring" type="submit"
+                            disabled={loading}
                             >Cancelar
                         </button>
                         <button
                             type="submit"
                             className="block w-1/2 rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                             data-te-ripple-init
-                            data-te-ripple-color="light">
-                            Crear
+                            data-te-ripple-color="light"
+                            disabled={loading}
+                            >
+                            {loading ? 'Creando...' : 'Crear'}
                         </button>
                     </div>
                 </form>
