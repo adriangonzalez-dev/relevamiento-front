@@ -11,22 +11,22 @@ export const ResultCountry = () => {
     const {id} = useParams()
     const {data, isLoading} = useData()
 
-    const getCountryTickets = () => {
-      if(!isLoading){
-        if(id){
-          const countryData = data.filter(item => {
-            if(item.country){
-              return +item.country?.id === +id
-            }
-          });
-          setNewData(countryData)
-        }
-      }
-    }
     
     useEffect(() => {
+      const getCountryTickets = () => {
+        if(!isLoading){
+          if(id){
+            const countryData = data.filter(item => {
+              if(item.country){
+                return +item.country?.id === +id
+              }
+            });
+            setNewData(countryData)
+          }
+        }
+      }
       getCountryTickets()
-    },[id, data])
+    },[id, data, isLoading])
 
     if(newData?.length === 0) {
       return <div>El país no tiene pedidos, aún...</div>

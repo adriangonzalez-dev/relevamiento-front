@@ -13,22 +13,22 @@ export const ResultAgent = () => {
   const {id} = useParams()
   const {data, isLoading} = useData()
 
-  const getAgentTickets = () => {
-    if(!isLoading){
-      if(id){
-        const agentData = data.filter(item => {
-          if(item.country){
-            return +item.agent?.id === +id
-          }
-        });
-        setNewData(agentData)
-      }
-    }
-  }
   
   useEffect(() => {
+    const getAgentTickets = () => {
+      if(!isLoading){
+        if(id){
+          const agentData = data.filter(item => {
+            if(item.country){
+              return +item.agent?.id === +id
+            }
+          });
+          setNewData(agentData)
+        }
+      }
+    }
     getAgentTickets()
-  },[id, data])
+  },[id, data, isLoading])
 
   if(newData?.length === 0) {
     return <div>El agente no tiene pedidos, aún...</div>
