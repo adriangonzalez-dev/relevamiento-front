@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import DataContext from './dataContext';
+import DataContext, { DataSheet } from './dataContext';
 import { initialState, dataReducer } from './dataReducer';
 import { getData } from '../../services/dataServices';
 import { DATA } from '../../context/data/dataReducer'
@@ -11,6 +11,16 @@ interface Props {
 export const DataProvider = ({children}:Props) =>{
     const [data, dataDispatch] = useReducer(dataReducer, initialState);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const updatedData = async (response:Array<DataSheet>) => {
+        try {
+            dataDispatch({type: DATA.GET_ALL , payload: response})
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     const retrieveData = async () =>{
         try {
@@ -27,7 +37,7 @@ export const DataProvider = ({children}:Props) =>{
     }, []);
 
     return(
-        <DataContext.Provider value={{data, isLoading}}>
+        <DataContext.Provider value={{data, isLoading, updatedData}}>
             {children}
         </DataContext.Provider>
     )

@@ -97,7 +97,7 @@ export const BarGraphic = () => {
         getData()
     },[isLoading, data])
     return(
-      <Card className="max-w-lg h-full">
+      <Card className="max-w-lg h-72 lg:h-full">
             <Title>Total por via de solicitud</Title>
             <Flex className="mt-4">
             <Text>

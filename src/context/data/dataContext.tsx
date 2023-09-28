@@ -58,11 +58,13 @@ export interface DataSheet {
 interface DataContextProps {
     data: Array<DataSheet>
     isLoading: boolean
+    updatedData: (data:Array<DataSheet>) => void
 }
 
 const initialState:DataContextProps = {
     data: [],
-    isLoading: false
+    isLoading: false,
+    updatedData: () => {}
 }
 
 const DataContext = createContext<DataContextProps>(initialState);
