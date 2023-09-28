@@ -1,4 +1,5 @@
 import { useMetadata } from "../hooks/useMetadata"
+import { NavLink } from 'react-router-dom'
 
 export const Sidebar = () => {
   const {agentes, isLoading, paises} = useMetadata()
@@ -13,12 +14,12 @@ export const Sidebar = () => {
 
     <ul className="mt-6 space-y-1">
       <li>
-        <a
-          href=""
+        <NavLink
+          to="/"
           className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
         >
           General
-        </a>
+        </NavLink>
       </li>
 
       <li>
@@ -53,12 +54,12 @@ export const Sidebar = () => {
                     ) : (
                     paises?.map((pais) =>
                       <li key={pais.id}>
-                        <a
-                          href=""
+                        <NavLink
+                          to={`/paises/${pais.id}`}
                           className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                         >
                           {pais.name}
-                        </a>
+                        </NavLink>
                       </li>))
                 }
           </ul>
@@ -97,12 +98,12 @@ export const Sidebar = () => {
               ):(
                 agentes?.map((agente) => (
                   <li key={agente.id}>
-                    <a
-                      href=""
+                    <NavLink
+                      to={`/agentes/${agente.id}`}
                       className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
                       {agente.name}
-                    </a>
+                    </NavLink>
                   </li>
                 ))
               )
