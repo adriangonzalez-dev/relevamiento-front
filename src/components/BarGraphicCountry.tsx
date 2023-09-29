@@ -6,6 +6,7 @@ import { useMetadata } from "../hooks/useMetadata";
 
 interface Props {
     data: DataSheet[] | undefined
+    className?: string
 }
 
 interface InitialValue {
@@ -53,7 +54,7 @@ const initialValue:InitialValue[] = [
   },
 ];
 
-export const BarGraphicCountry = ({data}:Props) => {
+export const BarGraphicCountry = ({data, className}:Props) => {
     const [newData, setNewData] = useState<InitialValue[]>(initialValue)
     const {via, isLoading} = useMetadata()
     useEffect(() => {
@@ -104,17 +105,20 @@ export const BarGraphicCountry = ({data}:Props) => {
         getData()
     },[data, via, isLoading])
     return(
-      <Card className="max-w-lg h-72 lg:h-full">
+      <Card className={`${className ? className : 'max-w-lg h-72 lg:h-full'}`}>
             <Title>Total por via de solicitud</Title>
             <Flex className="mt-4">
-            <Text>
-                <Bold>Via de solicitud</Bold>
-            </Text>
-            <Text>
-                <Bold>Tickets</Bold>
-            </Text>
-            </Flex>
-            <BarList data={newData} className="mt-2" />
+              <Text>
+                  <Bold>Via de solicitud</Bold>
+              </Text>
+              <Text>
+                  <Bold>Tickets</Bold>
+              </Text>
+              </Flex>
+            <BarList 
+            showAnimation={false}
+            data={newData} 
+            className="mt-4" />
         </Card>
     )
 };

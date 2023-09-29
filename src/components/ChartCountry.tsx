@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { DataSheet } from "../context/data/dataContext";
 
 interface Props {
-    data: DataSheet[] | undefined
+    data: DataSheet[] | undefined,
+    className?:string
 }
 
-export const ChartCountry = ({data}:Props) => {
+export const ChartCountry = ({data,className}:Props) => {
   
   const [typesCounts, SetTypesCounts] = useState<{ types: string; count: number }[]>([]);
 
@@ -39,7 +40,7 @@ export const ChartCountry = ({data}:Props) => {
   }, [data]);
 
   return (
-    <Card className="max-w-lg">
+    <Card className={`${className ? className : 'max-w-lg'}`}>
             <Title>Total pedidos: {data?.length}</Title>
             <DonutChart
               variant="pie"
