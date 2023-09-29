@@ -7,7 +7,7 @@ interface Props {
 export const Header = ({handleActiveForm}:Props) => {
   return (
     <header>
-      <div className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 shadow">
+      <div className="mx-auto px-4 py-8 sm:px-6 sm:py-8 lg:px-8 shadow">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
