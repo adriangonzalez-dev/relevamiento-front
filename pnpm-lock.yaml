@@ -14,9 +14,6 @@ dependencies:
   axios:
     specifier: ^1.5.0
     version: 1.5.0
-  html2canvas:
-    specifier: ^1.4.1
-    version: 1.4.1
   jspdf:
     specifier: ^2.5.1
     version: 2.5.1

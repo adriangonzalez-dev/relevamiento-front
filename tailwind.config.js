@@ -12,6 +12,15 @@ export default {
     transparent: "transparent",
     current: "currentColor",
     extend: {
+      backgroundImage: {
+        'portada-arg': "url('./assets/Portada/portadas-03.jpg')",
+        /* 'portada-br': "url('./assets/Portada/Brasil_portada_.png')",
+        'portada-int': "url('./assets/Portada/Interno_portada_.png')",
+        'portada-mx': "url('/assets/Portada/Mexico_portada_.png')",
+        'portada-pa': "url('./assets/Portada/Panama_portada_.png')",
+        'portada-pr': "url('./assets/Portada/PuertoRico_portada_.png')",
+        'portada-uy': "url('./assets/Portada/Uruguay_portada_.png')", */
+      },
       colors: {
         // light mode
         tremor: {
@@ -65,6 +74,9 @@ export default {
         "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
         "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
       },
+      fontFamily: {
+        ubuntu: ['Ubuntu', 'sans-serif']
+      }
     },
   },
   safelist: [
