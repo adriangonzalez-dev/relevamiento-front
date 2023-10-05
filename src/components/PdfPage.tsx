@@ -3,12 +3,12 @@
 import { DataSheet } from '../context/data/dataContext'
 import { BarGraphicCountry } from './BarGraphicCountry'
 import { ChartCountry } from './ChartCountry'
-import { RowResult } from './RowResult'
-import banner from '../assets/Portada/banner.png'
-import banner2 from '../assets/Portada/banner2.png'
-import tecs from '../assets/Portada/Recurso 4.png'
-import imageFooter from '../assets/Portada/Recurso 11@4x.png'
+import { banner, banner2, tecs } from '../assets/Portada'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useCountryData } from '../hooks/useCountryData'
+import { useDictionary } from '../hooks/useDictionary'
+import { RowResultCountry } from './RowResultCountry'
 
 
 interface Props {
@@ -17,11 +17,12 @@ interface Props {
 }
 
 export const PdfPage = ({data, images}:Props) => {
+  const {id} = useParams()
   const [contentData, setContentData] = useState<DataSheet[] | undefined>([]);
   const [migrationData, setMigrationData] = useState<DataSheet[] | undefined>([]);
   const [displayData, setDisplayData] = useState<DataSheet[] | undefined>([]);
-  
-  
+  const { page } = useDictionary({id:id ? +id : undefined})
+  const {dataCountry} = useCountryData({id:id ? +id : undefined})
   
   useEffect(() => {
     const content = [366,130, 142, 138];
@@ -44,7 +45,7 @@ export const PdfPage = ({data, images}:Props) => {
     <div className="w-[210mm] h-[297mm] mx-auto relative page">
       <div className='mb-2 relative'>
         <img src={banner} alt="" />
-        <p className='absolute bottom-12 left-32 text-4xl font-bold'>Solicitudes de contenido</p>
+        <p className='absolute bottom-12 left-32 text-4xl font-bold'>{page.title}</p>
       </div>
     <div className="flex flex-row justify-center gap-2">
       <ChartCountry data={data} className={`w-1/2 p-2`} />
@@ -74,31 +75,28 @@ export const PdfPage = ({data, images}:Props) => {
             <thead className="ltr:text-left rtl:text-right">
               <tr>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Pedido
+                  {page.tableHeads.request}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Segmento
+                  {page.tableHeads.category}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  País
+                  {page.tableHeads.request_date}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Fecha de solicitud
-                </th>
-                <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Fecha de implementación
+                  {page.tableHeads.implementation_date}
                 </th>
               </tr>
             </thead>
               <tbody className="divide-y divide-gray-200">
               {
-                contentData?.map(item => <RowResult row={item} key={item.id} />)
+                contentData?.map(item => <RowResultCountry row={item} key={item.id} />)
               }
               </tbody>
           </table>
         </div>
         :
-        <p className='text-center text-2xl font-bold text-gray-700 mt-2 mb-2'>No existen datos de nuevo contenido</p>
+        <p className='text-center text-2xl font-bold text-gray-700 mt-2 mb-2'>{page.noDataContent}</p>
       }
     </div>
     <div className='page'>
@@ -107,32 +105,29 @@ export const PdfPage = ({data, images}:Props) => {
         <>
           <div className='relative'>
             <img src={banner2} alt="" />
-            <p className='absolute bottom-4 left-32 font-bold text-2xl'>Nuevas Sucursales</p>
+            <p className='absolute bottom-4 left-32 font-bold text-2xl'>{page.subtitleOne}</p>
           </div>
           <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm mb-2">
               <thead className="ltr:text-left rtl:text-right">
                 <tr>
                   <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                    Pedido
+                    {page.tableHeads.request}
                   </th>
                   <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                    Segmento
+                    {page.tableHeads.category}
                   </th>
                   <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                    País
+                    {page.tableHeads.request_date}
                   </th>
                   <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                    Fecha de solicitud
-                  </th>
-                  <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                    Fecha de implementación
+                    {page.tableHeads.implementation_date}
                   </th>
                 </tr>
               </thead>
 
               <tbody className="divide-y divide-gray-200">
                 {
-                  migrationData?.map(item => <RowResult row={item} key={item.id} />)
+                  migrationData?.map(item => <RowResultCountry row={item} key={item.id} />)
                 }
               </tbody>
           </table>
@@ -143,32 +138,29 @@ export const PdfPage = ({data, images}:Props) => {
         <>
           <div className='relative'>
           <img src={banner2} alt="" />
-          <p className='absolute bottom-4 left-32 font-bold text-2xl'>Cambios o nuevas pantallas</p>
+          <p className='absolute bottom-4 left-32 font-bold text-2xl'>{page.subtitleTwo}</p>
         </div>
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm mb-2">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Pedido
+                  {page.tableHeads.request}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Segmento
+                  {page.tableHeads.category}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  País
+                  {page.tableHeads.request_date}
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Fecha de solicitud
-                </th>
-                <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Fecha de implementación
+                  {page.tableHeads.implementation_date}
                 </th>
               </tr>
             </thead>
 
             <tbody className="divide-y divide-gray-200">
               {
-                displayData?.map(item => <RowResult row={item} key={item.id} />)
+                displayData?.map(item => <RowResultCountry row={item} key={item.id} />)
               }
             </tbody>
           </table>
@@ -176,16 +168,18 @@ export const PdfPage = ({data, images}:Props) => {
       }
       <div className='flex w-full'>
             <div className='w-1/4 flex items-center justify-center'>
-              <img src={tecs} alt="" className='w-20' />
+              <img src={tecs} alt="" className='w-32' />
             </div>
             <div  className='w-3/4 relative flex items-center justify-start'>
               <div className='flex flex-col justify-center items-start gap-2'>
-                {
-                  (migrationData && migrationData?.length > 0) && <p className='text-xl font-bold'>Cantidad de nuevas sucursales: {migrationData?.length ?? 0}</p>
-                }
-                <a href="https://www.google.com" className='btn btn-outline btn-warning'>Modulación</a>
+                <div className='w-full flex items-center flex-col relative left-20'>
+                  {
+                    (migrationData && migrationData?.length > 0) && <p className='text-xl font-bold'>{`${page.totalMigrations}: ${migrationData?.length ?? 0}`}</p>
+                  }
+                  <a href="https://www.google.com" className='btn btn-outline btn-warning'>{page.modulacion}</a>
+                </div>
               </div>
-              <img src={imageFooter} alt="" className='absolute w-32 right-0 bottom-0'/>
+              <img src={dataCountry?.footer} alt="" className='absolute w-32 right-2 bottom-2'/>
             </div>
       </div>
     </div>

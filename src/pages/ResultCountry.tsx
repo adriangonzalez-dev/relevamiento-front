@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom'
-import { RowResult } from '../components/RowResult'
 import { useData } from '../hooks/useData'
 import { useEffect, useState } from 'react'
 import { DataSheet } from '../hooks/useSheets'
 import { ChartCountry } from '../components/ChartCountry'
 import { BarGraphicCountry } from '../components/BarGraphicCountry'
 import { PdfModal } from '../components/PdfModal'
+import { RowResultCountry } from '../components/RowResultCountry'
 
 export const ResultCountry = () => {
     const [newData, setNewData] = useState<DataSheet[]>()
@@ -51,10 +51,7 @@ export const ResultCountry = () => {
                   Pedido
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  Segmento
-                </th>
-                <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
-                  País
+                  Categoría
                 </th>
                 <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left">
                   Fecha de solicitud
@@ -67,7 +64,7 @@ export const ResultCountry = () => {
 
             <tbody className="divide-y divide-gray-200">
               {
-                newData?.map(item=><RowResult row={item} key={item.id}/>)
+                newData?.map(item=><RowResultCountry row={item} key={item.id}/>)
               }
             </tbody>
           </table>

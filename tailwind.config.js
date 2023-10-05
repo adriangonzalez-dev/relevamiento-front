@@ -13,13 +13,13 @@ export default {
     current: "currentColor",
     extend: {
       backgroundImage: {
-        'portada-arg': "url('./assets/Portada/portadas-03.jpg')",
-        /* 'portada-br': "url('./assets/Portada/Brasil_portada_.png')",
-        'portada-int': "url('./assets/Portada/Interno_portada_.png')",
-        'portada-mx': "url('/assets/Portada/Mexico_portada_.png')",
-        'portada-pa': "url('./assets/Portada/Panama_portada_.png')",
-        'portada-pr': "url('./assets/Portada/PuertoRico_portada_.png')",
-        'portada-uy': "url('./assets/Portada/Uruguay_portada_.png')", */
+        'ar': "url('./assets/Portada/ar.jpg')",
+        'br': "url('./assets/Portada/br.jpg')",
+        'int': "url('./assets/Portada/general.jpg')",
+        'mx': "url('./assets/Portada/mx.jpg')",
+        'pa': "url('./assets/Portada/pa.jpg')",
+        'pr': "url('./assets/Portada/pr.jpg')",
+        'uy': "url('./assets/Portada/uy.jpg')",
       },
       colors: {
         // light mode
