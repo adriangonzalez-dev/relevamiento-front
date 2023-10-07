@@ -5,22 +5,30 @@ interface Props {
 export const useDictionary = ({id}:Props) => {
     const idExists = (id && +id !== 47)
     const page = {
+
+        header: idExists ? 'Resumen Mensual' : 'Relatório mensal',
         title: idExists ? 'Solicitud de contenido' : 'Pedido de conteúdo',
         chartGraphTitle: idExists ? 'Total pedidos' : 'Total de pedidos',
         barGraphTitle: idExists ? 'Total por via de solicitud': 'Total por meio de solicitação',
         noDataContent: idExists ? 'No existen datos de contenido' : 'Não existem dados de conteúdo',
         subtitleOne: idExists ? 'Nuevas Sucursales': 'Novas Filiais',
         tableHeads: {
-            request: idExists ? 'Pedido' : 'Pedido',
+            request: idExists ? 'Solicitudes' : 'Requisições',
             segment: idExists ? 'Segmento' : 'Segmento',
             country: idExists ? 'País' : 'País',
             category: idExists ? 'Categoría' : 'Categoria',
             request_date: idExists ? 'Fecha de solicitud' : 'Data de solicitação',
             implementation_date: idExists ? 'Fecha de implementación' : 'Data de implementação',
+            state: idExists ? 'Estado' : 'Estado',
+            via: idExists ? 'Via' : 'Canal',
         },
         subtitleTwo: idExists ? 'Cambios o nuevas pantallas' : 'Mudanças ou novas telas',
         totalMigrations: idExists ? 'Cantidad de nuevas sucursales' : 'Quantidade de novas filiais',
         modulacion: idExists ? 'Modulación' : 'Modulação',
+        stateColumn: {
+          complete: idExists ? 'Completado' : 'Concluído',
+          pending: idExists ? 'Pendiente' : 'Pendente',
+        }
     }
     const getDate =()=> {
         const meses_es = [

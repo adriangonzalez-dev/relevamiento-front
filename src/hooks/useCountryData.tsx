@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const useCountryData = ({id}:Props) => {
-    const [dataCountry, setDataCountry] = useState<{id:number, pais:string, footer: string}>()
+    const [dataCountry, setDataCountry] = useState<{id:number, gradient:string, flag: string}>()
 
     useEffect(()=>{
         const getInfoData = () => {

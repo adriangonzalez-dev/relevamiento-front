@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { DataSheet } from '../hooks/useSheets'
 import { ChartCountry } from '../components/ChartCountry'
 import { BarGraphicCountry } from '../components/BarGraphicCountry'
-import { PdfModal } from '../components/PdfModal'
+import { PdfModal } from '../components/pdf/PdfModal'
 import { RowResultCountry } from '../components/RowResultCountry'
 
 export const ResultCountry = () => {

@@ -1,9 +1,9 @@
 
-import { DataSheet } from "../context/data/dataContext"
-import { usePDF } from "../hooks/usePDF";
+import { DataSheet } from "../../context/data/dataContext"
+import { usePDF } from "../../hooks/usePDF";
 import { PdfPage } from "./PdfPage";
+import { useImagePreview } from "../../hooks/useImagePreview";
 import { PdfCover } from "./PdfCover";
-import { useImagePreview } from "../hooks/useImagePreview";
 
 interface Props {
   data: DataSheet[] | undefined,
@@ -19,7 +19,7 @@ export const PdfModal = ({ data, setModal }: Props) => {
     <div className="flex flex-col fixed top-0 w-screen h-screen backdrop-blur flex items-center justify-center">
       <div className="bg-white w-3/5 h-3/4 overflow-scroll relative">
       <button onClick={() => setModal()} className="fixed top-5 right-5 text-xg font-bold btn btn-error"><span>X</span></button>
-        <div className="w-[210mm] h-[594mm] mx-auto" ref={componentRef}>
+        <div className="w-[210mm] h-[297mm] mx-auto" ref={componentRef}>
           <PdfCover/>
           <PdfPage data={data} images={imagePreviews ? imagePreviews : undefined}/>
         </div>

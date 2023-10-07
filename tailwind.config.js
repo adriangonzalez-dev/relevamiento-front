@@ -12,16 +12,41 @@ export default {
     transparent: "transparent",
     current: "currentColor",
     extend: {
-      backgroundImage: {
-        'ar': "url('./assets/Portada/ar.jpg')",
-        'br': "url('./assets/Portada/br.jpg')",
-        'int': "url('./assets/Portada/general.jpg')",
-        'mx': "url('./assets/Portada/mx.jpg')",
-        'pa': "url('./assets/Portada/pa.jpg')",
-        'pr': "url('./assets/Portada/pr.jpg')",
-        'uy': "url('./assets/Portada/uy.jpg')",
-      },
       colors: {
+          ar:{
+            1:'#75AADB',
+            2:'#FFFFFF',
+            3:'#FFCC29'
+          },
+          br: {
+            1:'#00994D',
+            2:'#FFCC29',
+            3:'#0052B4'
+          },
+          uy: {
+            1:'#003478',
+            2:'#FFFFFF'
+          },
+          pr:{
+            1:'#EF3340',
+            2:'#FFFFFF',
+            3:'#0055A4'
+          },
+          co:{
+            1:'#FFDA1A',
+            2:'#003D6B',
+            3:'#EF4135'
+          },
+          pa:{
+            1:'#D71E28',
+            2:'#FFFFFF',
+            3:'#0055A4'
+          },
+          mx:{
+            1:'#138808',
+            2:'#FFFFFF',
+            3:'#CE1126'
+          },
         // light mode
         tremor: {
           brand: {

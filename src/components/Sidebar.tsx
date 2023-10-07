@@ -84,6 +84,14 @@ export const Sidebar = () => {
                 </li>
                 <li>
                   <NavLink
+                    to={`/paises/589`}
+                    className={({ isActive }) => (isActive ? activeLink : inactiveLink)}
+                  >
+                    Puerto Rico
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to={`/paises/59`}
                     className={({ isActive }) => (isActive ? activeLink : inactiveLink)}
                   >

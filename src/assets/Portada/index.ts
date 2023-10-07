@@ -1,46 +1,51 @@
 
-import footerMx from './footer-mx.png';
-import footerBr from './footer-br.png';
-import footerAr from './footer-ar.png';
-import footerUy from './footer-uy.png';
-import footerPa from './footer-pa.png';
-/* import footerPr from './footer-pr.png'; */
+import mx from './flags/mexico.png';
+import br from './flags/brasil.png';
+import ar from './flags/argentina.png';
+import uy from './flags/uruguay.png';
+import pa from './flags/panama.png';
+import pr from './flags/puerto-rico.png';
 import banner from './banner.png'
 import banner2 from './banner2.png'
 import tecs from './tecs.png'
 
 export interface PdfData {
     id: number,
-    pais: string,
-    footer: string
+    gradient: string,
+    flag: string
 }
 
 export const pdfData: PdfData[] = [
     {
         id: 30,
-        pais: 'bg-ar',
-        footer: footerAr,
+        gradient: 'from-blue-200 to-white',
+        flag: ar,
     },
     {
         id: 47,
-        pais: 'bg-br',
-        footer: footerBr,
+        gradient: 'from-yellow-100 to-white',
+        flag: br,
     },
     {
         id: 53,
-        pais: 'bg-mx',
-        footer: footerMx,
+        gradient: 'bg-gradient-to-r from-green-200 via-white to-red-200',
+        flag: mx,
     },
     {
         id: 57,
-        pais: 'bg-pa',
-        footer: footerPa,
+        gradient: 'bg-gradient-to-bl from-red-200 via-white to-blue-200',
+        flag: pa,
     },
     {
         id: 59,
-        pais: 'bg-uy',
-        footer: footerUy,
+        gradient: 'bg-gradient-to-b from-blue-300 to-white',
+        flag: uy,
     },
+    {
+        id: 589,
+        gradient: 'from-pr-1 to-pr-2',
+        flag: pr,
+    }
 ]
 
 export {
