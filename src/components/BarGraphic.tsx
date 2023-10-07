@@ -53,10 +53,10 @@ export const BarGraphic = () => {
     const {data, isLoading} = useData()
     const {via} = useMetadata()
     const [newData, setNewData] = useState<InitialValue[]>(initialValue)
-    const getId = (name:string) => {
-      return via.find(item => item.name === name)?.id
-    }
     useEffect(() => {
+      const getId = (name:string) => {
+        return via.find(item => item.name === name)?.id
+      }
         const getData = () => {
             if (!isLoading && data) {
                 setNewData([
@@ -100,7 +100,7 @@ export const BarGraphic = () => {
               }
         }
         getData()
-    },[isLoading, data])
+    },[isLoading, data, via])
     return(
       <Card className="max-w-lg h-72 lg:h-full">
             <Title>Total por via de solicitud</Title>
