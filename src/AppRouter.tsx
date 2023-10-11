@@ -3,6 +3,7 @@ import { Root } from './layout/Root';
 import { Home } from './pages/Home';
 import { ResultCountry } from './pages/ResultCountry';
 import { ResultAgent } from './pages/ResultAgent';
+import { AuditsComponent } from './pages/Audits';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         {
             path: '/agentes/:id',
             element: <ResultAgent/>
+        },
+        {
+          path:'/audit',
+          element: <AuditsComponent/>
         }
       ]
     },
